@@ -632,12 +632,14 @@
     </div>
     
     <!-- Music Player -->
-    <div class="music-player" id="musicToggle">
-        <i class="fas fa-music"></i>
-        <audio id="bgMusic" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
-    </div>
+<div class="music-player" id="musicToggle">
+    <i class="fas fa-music"></i>
+</div>
+
+<audio id="bgMusic" loop>
+    <source src="1.mp3" type="audio/mpeg">
+</audio>
+
     
     <div class="container">
         <header class="header">
@@ -690,8 +692,7 @@
         
         <!-- Family Photos Section -->
 <section class="family-section">
-    <h2 class="section-title">ఆహ్వానించిన వారు:
-</h2>
+    <h2 class="section-title">మా కుటుంబ నిధులు</h2>
     <div class="family-photos">
         <div class="family-frame" style="position: relative;">
             <img src="images/family1.jpg"  style="width: 100%; height: auto; border-radius: 10px;" />
@@ -855,21 +856,23 @@
             const countdownInterval = setInterval(updateCountdown, 1000);
             
             // Music Player
-            const musicToggle = document.getElementById('musicToggle');
-            const bgMusic = document.getElementById('bgMusic');
-            let isPlaying = false;
-            
-            musicToggle.addEventListener('click', function() {
-                if (isPlaying) {
-                    bgMusic.pause();
-                    musicToggle.innerHTML = '<i class="fas fa-music"></i>';
-                } else {
-                    bgMusic.play();
-                    musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
-                }
-                isPlaying = !isPlaying;
+    const musicToggle = document.getElementById('musicToggle');
+    const bgMusic = document.getElementById('bgMusic');
+    let isPlaying = false;
+
+    musicToggle.addEventListener('click', function () {
+        if (isPlaying) {
+            bgMusic.pause();
+            musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+        } else {
+            bgMusic.play().then(() => {
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            }).catch(error => {
+                console.log("Playback failed:", error);
             });
-            
+        }
+        isPlaying = !isPlaying;
+    });
             // Click anywhere celebration
             document.addEventListener('click', function(e) {
                 createGoldenParticle(e.clientX, e.clientY);
@@ -878,4 +881,3 @@
     </script>
 </body>
 </html>
-
